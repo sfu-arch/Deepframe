@@ -1,0 +1,103 @@
+\hypertarget{_needle_helper_8cpp}{}\section{dandelion/path\+\_\+sequence/needle/lib/needle/\+Needle\+Helper.cpp File Reference}
+\label{_needle_helper_8cpp}\index{dandelion/path\_sequence/needle/lib/needle/NeedleHelper.cpp@{dandelion/path\_sequence/needle/lib/needle/NeedleHelper.cpp}}
+{\ttfamily \#include \char`\"{}Needle\+Outliner.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+A\+P\+Int.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+Dense\+Set.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+Post\+Order\+Iterator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+Small\+Vector.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Basic\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+C\+F\+G.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Type\+Based\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Basic\+Block.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+C\+F\+G.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Debug\+Info.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Derived\+Types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Dominators.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Legacy\+Pass\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Pass\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Verifier.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Support/\+File\+System.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Basic\+Block\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Cloning.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Code\+Extractor.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cxxabi.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Instruction.\+def\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_needle_helper_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}{D\+E\+B\+U\+G\+\_\+\+T\+Y\+PE}}~\char`\"{}needle\char`\"{}
+\item 
+\#define \mbox{\hyperlink{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}{H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST}}(N,  O\+P\+C\+O\+DE,  C\+L\+A\+SS)
+\item 
+\#define \mbox{\hyperlink{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}{H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST}}(N,  O\+P\+C\+O\+DE,  C\+L\+A\+SS)~Opcode\+Count\mbox{[}\#O\+P\+C\+O\+DE\mbox{]} = 0;
+\item 
+\#define \mbox{\hyperlink{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}{H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST}}(N,  O\+P\+C\+O\+DE,  C\+L\+A\+SS)~Opcode\+Wt\mbox{[}\#O\+P\+C\+O\+DE\mbox{]} = 1;
+\item 
+\#define \mbox{\hyperlink{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}{H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST}}(N,  O\+P\+C\+O\+DE,  C\+L\+A\+SS)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_helper_8cpp_a4289a81c437447225c09dac18141c3ab}{Offload\+D\+FG}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_needle_helper_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}\label{_needle_helper_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!DEBUG\_TYPE@{DEBUG\_TYPE}}
+\index{DEBUG\_TYPE@{DEBUG\_TYPE}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{DEBUG\_TYPE}{DEBUG\_TYPE}}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+\_\+\+T\+Y\+PE~\char`\"{}needle\char`\"{}}
+
+
+
+Definition at line 1 of file Needle\+Helper.\+cpp.
+
+\mbox{\Hypertarget{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}\label{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!HANDLE\_INST@{HANDLE\_INST}}
+\index{HANDLE\_INST@{HANDLE\_INST}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{HANDLE\_INST}{HANDLE\_INST}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \#define H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST(\begin{DoxyParamCaption}\item[{}]{N,  }\item[{}]{O\+P\+C\+O\+DE,  }\item[{}]{C\+L\+A\+SS }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{case} N:                                                                    \(\backslash\)}
+\DoxyCodeLine{        return string(\#OPCODE);}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}\label{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!HANDLE\_INST@{HANDLE\_INST}}
+\index{HANDLE\_INST@{HANDLE\_INST}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{HANDLE\_INST}{HANDLE\_INST}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \#define H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST(\begin{DoxyParamCaption}\item[{}]{N,  }\item[{}]{O\+P\+C\+O\+DE,  }\item[{}]{C\+L\+A\+SS }\end{DoxyParamCaption})~Opcode\+Count\mbox{[}\#O\+P\+C\+O\+DE\mbox{]} = 0;}
+
+\mbox{\Hypertarget{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}\label{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!HANDLE\_INST@{HANDLE\_INST}}
+\index{HANDLE\_INST@{HANDLE\_INST}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{HANDLE\_INST}{HANDLE\_INST}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \#define H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST(\begin{DoxyParamCaption}\item[{}]{N,  }\item[{}]{O\+P\+C\+O\+DE,  }\item[{}]{C\+L\+A\+SS }\end{DoxyParamCaption})~Opcode\+Wt\mbox{[}\#O\+P\+C\+O\+DE\mbox{]} = 1;}
+
+\mbox{\Hypertarget{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}\label{_needle_helper_8cpp_aab230a01f3c453a49b1ccc04c5ded6c8}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!HANDLE\_INST@{HANDLE\_INST}}
+\index{HANDLE\_INST@{HANDLE\_INST}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{HANDLE\_INST}{HANDLE\_INST}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \#define H\+A\+N\+D\+L\+E\+\_\+\+I\+N\+ST(\begin{DoxyParamCaption}\item[{}]{N,  }\item[{}]{O\+P\+C\+O\+DE,  }\item[{}]{C\+L\+A\+SS }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{case} N:                                                                    \(\backslash\)}
+\DoxyCodeLine{        OpcodeCount[\#OPCODE] += 1;                                             \(\backslash\)}
+\DoxyCodeLine{        break;}
+
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{_needle_helper_8cpp_a4289a81c437447225c09dac18141c3ab}\label{_needle_helper_8cpp_a4289a81c437447225c09dac18141c3ab}} 
+\index{NeedleHelper.cpp@{NeedleHelper.cpp}!OffloadDFG@{OffloadDFG}}
+\index{OffloadDFG@{OffloadDFG}!NeedleHelper.cpp@{NeedleHelper.cpp}}
+\subsubsection{\texorpdfstring{OffloadDFG}{OffloadDFG}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Offload\+D\+FG}
+

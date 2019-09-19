@@ -1,0 +1,145 @@
+\hypertarget{_needle_outliner_8cpp}{}\section{dandelion/path\+\_\+sequence/needle/lib/needle/\+Needle\+Outliner.cpp File Reference}
+\label{_needle_outliner_8cpp}\index{dandelion/path\_sequence/needle/lib/needle/NeedleOutliner.cpp@{dandelion/path\_sequence/needle/lib/needle/NeedleOutliner.cpp}}
+{\ttfamily \#include \char`\"{}Needle\+Outliner.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+A\+P\+Int.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+Dense\+Set.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+A\+D\+T/\+Small\+Vector.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Basic\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+C\+F\+G.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+C\+F\+L\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Globals\+Mod\+Ref.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Scalar\+Evolution\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Scoped\+No\+Alias\+A\+A.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Analysis/\+Type\+Based\+Alias\+Analysis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Basic\+Block.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+C\+F\+G.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Debug\+Info.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Derived\+Types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Dominators.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Instr\+Types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Legacy\+Pass\+Manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R/\+Verifier.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+I\+R\+Reader/\+I\+R\+Reader.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Linker/\+Linker.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Support/\+File\+System.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Support/\+Source\+Mgr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+I\+P\+O/\+Pass\+Manager\+Builder.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Basic\+Block\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Cloning.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+Code\+Extractor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}llvm/\+Transforms/\+Utils/\+S\+S\+A\+Updater.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cxxabi.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$deque$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_needle_outliner_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}{D\+E\+B\+U\+G\+\_\+\+T\+Y\+PE}}~\char`\"{}needle\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_needle_outliner_8cpp_a6ef74b6fec12bdde75ed73180cef793b}{is\+Target\+Function}} (const Function \&f, const cl\+::list$<$ std\+::string $>$ \&\mbox{\hyperlink{_needle_sequence_outliner_8cpp_a319fff515a7892ac6351fdaf87a0043b}{Function\+List}})
+\item 
+Set\+Vector$<$ Basic\+Block $\ast$ $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a0b80705e7e30ba790d3ce87de74292c0}{get\+Topo\+Chop}} (Dense\+Set$<$ Basic\+Block $\ast$ $>$ \&Chop, Basic\+Block $\ast$Start\+BB, Dense\+Set$<$ pair$<$ const Basic\+Block $\ast$, const Basic\+Block $\ast$ $>$$>$ \&Back\+Edges)
+\begin{DoxyCompactList}\small\item\em T\+O\+DO \+: Rewrite this to use Function\+R\+P\+OT instead. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+cl\+::list$<$ std\+::string $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a319fff515a7892ac6351fdaf87a0043b}{Function\+List}}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a217ed1cc35f920144543d04770bbefa8}{Enable\+Value\+Logging}}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_outliner_8cpp_af1ea72d7a7d6c010d4fe9924ae943d5c}{Enable\+Memory\+Logging}}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a2e0f9c3ef3fabce91ed81b8dbd3085a1}{Enable\+Simple\+Logging}}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a44875c0bab4549e51a668f5125931ac5}{Simulate\+D\+FG}}
+\item 
+cl\+::opt$<$ Extract\+Type $>$ \mbox{\hyperlink{_needle_outliner_8cpp_aae1381237912caf78ecda4998e9007ed}{Extract\+As}}
+\item 
+cl\+::opt$<$ bool $>$ \mbox{\hyperlink{_needle_outliner_8cpp_a96167ec06372f06fc0275d208e1e66d8}{Disable\+Undo\+Log}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_needle_outliner_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}\label{_needle_outliner_8cpp_ad78e062f62e0d6e453941fb4ca843e4d}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!DEBUG\_TYPE@{DEBUG\_TYPE}}
+\index{DEBUG\_TYPE@{DEBUG\_TYPE}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{DEBUG\_TYPE}{DEBUG\_TYPE}}
+{\footnotesize\ttfamily \#define D\+E\+B\+U\+G\+\_\+\+T\+Y\+PE~\char`\"{}needle\char`\"{}}
+
+
+
+Definition at line 1 of file Needle\+Outliner.\+cpp.
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_needle_outliner_8cpp_a0b80705e7e30ba790d3ce87de74292c0}\label{_needle_outliner_8cpp_a0b80705e7e30ba790d3ce87de74292c0}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!getTopoChop@{getTopoChop}}
+\index{getTopoChop@{getTopoChop}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{getTopoChop()}{getTopoChop()}}
+{\footnotesize\ttfamily Set\+Vector$<$Basic\+Block $\ast$$>$ get\+Topo\+Chop (\begin{DoxyParamCaption}\item[{Dense\+Set$<$ Basic\+Block $\ast$ $>$ \&}]{Chop,  }\item[{Basic\+Block $\ast$}]{Start\+BB,  }\item[{Dense\+Set$<$ pair$<$ const Basic\+Block $\ast$, const Basic\+Block $\ast$ $>$$>$ \&}]{Back\+Edges }\end{DoxyParamCaption})}
+
+
+
+T\+O\+DO \+: Rewrite this to use Function\+R\+P\+OT instead. 
+
+
+
+Definition at line 855 of file Needle\+Outliner.\+cpp.
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_a6ef74b6fec12bdde75ed73180cef793b}\label{_needle_outliner_8cpp_a6ef74b6fec12bdde75ed73180cef793b}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!isTargetFunction@{isTargetFunction}}
+\index{isTargetFunction@{isTargetFunction}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{isTargetFunction()}{isTargetFunction()}}
+{\footnotesize\ttfamily bool is\+Target\+Function (\begin{DoxyParamCaption}\item[{const Function \&}]{f,  }\item[{const cl\+::list$<$ std\+::string $>$ \&}]{Function\+List }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{_needle_outliner_8cpp_a96167ec06372f06fc0275d208e1e66d8}\label{_needle_outliner_8cpp_a96167ec06372f06fc0275d208e1e66d8}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!DisableUndoLog@{DisableUndoLog}}
+\index{DisableUndoLog@{DisableUndoLog}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{DisableUndoLog}{DisableUndoLog}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Disable\+Undo\+Log}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_af1ea72d7a7d6c010d4fe9924ae943d5c}\label{_needle_outliner_8cpp_af1ea72d7a7d6c010d4fe9924ae943d5c}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!EnableMemoryLogging@{EnableMemoryLogging}}
+\index{EnableMemoryLogging@{EnableMemoryLogging}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{EnableMemoryLogging}{EnableMemoryLogging}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Enable\+Memory\+Logging}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_a2e0f9c3ef3fabce91ed81b8dbd3085a1}\label{_needle_outliner_8cpp_a2e0f9c3ef3fabce91ed81b8dbd3085a1}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!EnableSimpleLogging@{EnableSimpleLogging}}
+\index{EnableSimpleLogging@{EnableSimpleLogging}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{EnableSimpleLogging}{EnableSimpleLogging}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Enable\+Simple\+Logging}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_a217ed1cc35f920144543d04770bbefa8}\label{_needle_outliner_8cpp_a217ed1cc35f920144543d04770bbefa8}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!EnableValueLogging@{EnableValueLogging}}
+\index{EnableValueLogging@{EnableValueLogging}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{EnableValueLogging}{EnableValueLogging}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Enable\+Value\+Logging}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_aae1381237912caf78ecda4998e9007ed}\label{_needle_outliner_8cpp_aae1381237912caf78ecda4998e9007ed}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!ExtractAs@{ExtractAs}}
+\index{ExtractAs@{ExtractAs}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{ExtractAs}{ExtractAs}}
+{\footnotesize\ttfamily cl\+::opt$<$Extract\+Type$>$ Extract\+As}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_a319fff515a7892ac6351fdaf87a0043b}\label{_needle_outliner_8cpp_a319fff515a7892ac6351fdaf87a0043b}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!FunctionList@{FunctionList}}
+\index{FunctionList@{FunctionList}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{FunctionList}{FunctionList}}
+{\footnotesize\ttfamily cl\+::list$<$std\+::string$>$ Function\+List}
+
+\mbox{\Hypertarget{_needle_outliner_8cpp_a44875c0bab4549e51a668f5125931ac5}\label{_needle_outliner_8cpp_a44875c0bab4549e51a668f5125931ac5}} 
+\index{NeedleOutliner.cpp@{NeedleOutliner.cpp}!SimulateDFG@{SimulateDFG}}
+\index{SimulateDFG@{SimulateDFG}!NeedleOutliner.cpp@{NeedleOutliner.cpp}}
+\subsubsection{\texorpdfstring{SimulateDFG}{SimulateDFG}}
+{\footnotesize\ttfamily cl\+::opt$<$bool$>$ Simulate\+D\+FG}
+
