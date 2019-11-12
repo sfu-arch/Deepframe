@@ -20,7 +20,7 @@
 
  1. Clone or download this repository: `$ git clone`[`https://csil-git1.cs.surrey.sfu.ca/amoeba/path_sequence.git`](https://csil-git1.cs.surrey.sfu.ca/amoeba/path_sequence.git)
  2. Download LLVM `$ cd path_sequence && ./get_llvm.sh && cd ..`
- 3. Run make in ==RLE mode==: `$ mkdir needle-build && cd needle-build && cmake ../needle -DLLVM_DIR=../path_sequence/llvm-3.8/share/llvm/cmake && make -j 4`
+ 3. Run make in **RLE mode**: `$ mkdir needle-build && cd needle-build && cmake ../needle -DLLVM_DIR=../path_sequence/llvm-3.8/share/llvm/cmake && make -j 4`
 
 ## Running the frame maker
 
