@@ -20,7 +20,7 @@
 
  1. Clone or download this repository: `$ git clone`[`https://csil-git1.cs.surrey.sfu.ca/amoeba/path_sequence.git`](https://csil-git1.cs.surrey.sfu.ca/amoeba/path_sequence.git)
  2. Download LLVM `$ cd path_sequence && ./get_llvm.sh && cd ..`
- 3. Run make `$ mkdir needle-build && cd needle-build && cmake ../needle -DLLVM_DIR=../path_sequence/llvm-3.8/share/llvm/cmake && make -j 4`
+ 3. Run make in ==RLE mode==: `$ mkdir needle-build && cd needle-build && cmake ../needle -DLLVM_DIR=../path_sequence/llvm-3.8/share/llvm/cmake && make -j 4`
 
 ## Running the frame maker
 
@@ -43,13 +43,13 @@
 `$ deepframe/run_miner.sh <text file listing app profile filepaths one per line> <log of no. of Spark partitions (depends on profile size)> <input type> 0 <no. of frame lengths to mine> <value of each frame length>`
 
 ## Training the frame predictor
-Comment out the line executing `train.py` in `deepframe/run_path_pred.sh`.
+Comment out the line executing `validate.py` in `deepframe/run_path_pred.sh`.
 
 `$ deepframe/run_path_pred.sh <text file listing app profile filepaths one per line> <log of no. of Spark partitions (depends on profile size)> <input type> <no. of different context sizes to train on> <value of each context size> <no. of different vector sizes to train on> <value of each vector size> <no. of different sample sizes to train on> <value of each sample size>`
 
 
 ## Validating the frame predictor
-Comment out the line executing `validate.py` in `deepframe/run_path_pred.sh`.
+Comment out the line executing `train.py` in `deepframe/run_path_pred.sh`.
 
 `$ deepframe/run_path_pred.sh <text file listing app profile filepaths one per line> <log of no. of Spark partitions (depends on profile size)> <input type> <no. of different context sizes trained on> <value of each context size> <no. of different vector sizes trained on> <value of each vector size> <no. of different sample sizes trained on> <value of each sample size> <input type to validate on> <confidence threshold>`
 
